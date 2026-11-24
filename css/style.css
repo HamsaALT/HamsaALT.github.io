@@ -27,6 +27,8 @@
   /* leakwatch demo */
   --sev-critical: #ffb1ab; --sev-high: #ffc9a6; --sev-medium: #f3d27a;
   --mark: rgba(255,122,26,.3);
+  /* Vikarbro demo: "can take it" */
+  --ok: #8fd19e;
   /* Surfaces, tints and shadows that change with the theme */
   --accent-3: #d9530a;
   --accent-label: rgba(255,122,26,.85);
@@ -97,6 +99,7 @@
   --map-building: #dcdcd8; --map-square: #e6e6e2; --map-zebra: #8d8d8a;
   --sev-critical: #b3261e; --sev-high: #8f3a00; --sev-medium: #6e5400;
   --mark: rgba(173,73,0,.16);
+  --ok: #1d6b35;
 }
 
 @font-face { font-family: "Unbounded"; font-weight: 200 900; font-display: swap; src: url("../fonts/unbounded.woff2") format("woff2"); }
@@ -542,6 +545,57 @@ html.ov-open body { padding-right: var(--scrollbar, 0); }
   .bf-demo { grid-template-columns: 1.05fr 1fr; }
   .bf-mapwrap { position: sticky; top: 90px; }
 }
+/* Small "Sample data" tag under a demo title */
+.demo-tag {
+  justify-self: start; margin: 0; padding: .2rem .7rem; border: 1px solid var(--line-2); border-radius: 999px; background: var(--tint-3);
+  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+}
+
+/* GreenHour demo: each bar is a button */
+.gh-demo, .vb-demo, .gh-out, .vb-out { display: grid; gap: 1rem; }
+.gh-out[hidden], .vb-out[hidden] { display: none; }
+.gh-bars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }
+.gh-bar {
+  width: 100%; min-height: 44px; display: grid; justify-items: center; gap: .3rem; padding: .6rem .3rem;
+  font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; cursor: pointer;
+}
+.gh-bar:hover { border-color: var(--accent-line); }
+.gh-val, .gh-time { font-family: var(--font-mono); font-size: .78rem; }
+.gh-time { color: var(--muted); }
+.gh-col { width: 100%; height: 6rem; display: flex; align-items: flex-end; justify-content: center; }
+.gh-col span { width: 55%; min-height: 4px; background: var(--muted); border-radius: 4px 4px 0 0; } /* 3:1 or more against the panel in both themes */
+.gh-tag { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.gh-bar[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.gh-bar[aria-pressed="true"] .gh-col span { background: var(--accent); }
+.gh-bar[aria-pressed="true"] .gh-time { color: var(--ink); font-weight: 700; }
+.gh-bar[aria-pressed="true"] .gh-time::before { content: "✓ "; color: var(--accent); }
+@media (min-width: 560px) { .gh-bars { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+
+/* Vikarbro demo */
+.vb-shifts { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.vb-shift {
+  width: 100%; min-height: 44px; display: grid; gap: .2rem; padding: .8rem 1rem; text-align: left;
+  font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; cursor: pointer;
+}
+.vb-shift:hover { border-color: var(--accent-line); }
+.vb-shift span { color: var(--muted); font-size: .88rem; }
+.vb-shift .vb-needs { font-family: var(--font-mono); font-size: .75rem; }
+.vb-shift[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.vb-shift[aria-pressed="true"] strong::before { content: "✓ "; color: var(--accent); }
+.vb-order { color: var(--muted); font-size: .9rem; }
+.vb-list { margin: 0; padding-left: 1.6rem; display: grid; gap: .7rem; }
+.vb-list > li { padding: .9rem 1rem; display: grid; gap: .45rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.vb-list > li::marker { color: var(--muted); font-family: var(--font-mono); font-size: .85rem; }
+.vb-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .4rem .8rem; }
+.vb-badge { display: inline-flex; align-items: center; gap: .35rem; padding: .15rem .65rem; border: 1px solid currentColor; border-radius: 999px; font-size: .82rem; font-weight: 600; }
+.vb-badge svg { width: 14px; height: 14px; }
+.vb-yes .vb-badge { color: var(--ok); }
+.vb-no .vb-badge { color: var(--sev-critical); }
+.vb-meta { color: var(--muted); font-size: .88rem; }
+.vb-list .pills { margin: 0; }
+.vb-reasons { margin: 0; padding-left: 1.2rem; display: grid; gap: .25rem; font-size: .9rem; }
+@media (min-width: 700px) { .vb-shifts { grid-template-columns: repeat(3, 1fr); } }
+
 /* ---------- What I work with ---------- */
 .skill-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 3rem; }
 .skill-card { display: grid; gap: .9rem; align-content: start; padding: 1.4rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }

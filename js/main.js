@@ -37,6 +37,31 @@ const PROJECTS = [
       { src: "images/projects/leakwatch/output.jpg", width: 1042, height: 739 }
     ],
     demo: "leakwatch"
+  },
+  {
+    slug: "greenhour",
+    title: "GreenHour",
+    status: "finished",
+    tech: ["Java", "Spring Boot", "Angular", "PostgreSQL", "Keycloak", "Testcontainers", "Power BI"],
+    code: "https://github.com/HamsaALT/greenhour",
+    cover: { src: "images/projects/greenhour/card.jpg", width: 960, height: 600 },
+    images: [
+      { src: "images/projects/greenhour/prices.jpg", width: 1280, height: 720 },
+      { src: "images/projects/greenhour/sources.jpg", width: 1152, height: 648 }
+    ],
+    demo: "greenhour"
+  },
+  {
+    slug: "vikarbro",
+    title: "Vikarbro",
+    status: "finished",
+    tech: ["Java", "Spring Boot", "Angular", "PostgreSQL", "Keycloak", "JUnit 5", "Testcontainers"],
+    code: "https://github.com/HamsaALT/vikarbro",
+    cover: { src: "images/projects/vikarbro/card.jpg", width: 1000, height: 625 },
+    images: [
+      { src: "images/projects/vikarbro/shift.jpg", width: 1280, height: 720 }
+    ],
+    demo: "vikarbro"
   }
 ];
 const PROJECT_PLACEHOLDERS = 3;
@@ -48,10 +73,10 @@ const CERTIFICATES = [];
 // need translating are written as { t: "key" } and their text is in TEXT (skills.items).
 const SKILLS = [
   { group: "code", items: ["Java", "Spring Boot", "C#", ".NET", "ASP.NET Core", "Python", "TypeScript", "JavaScript", "React", "Angular", "Node.js", "Express", "HTML", "CSS", "C"] },
-  { group: "data", items: ["SQL", "PostgreSQL", "MongoDB", "Supabase", "Power BI"] },
-  { group: "testing", items: [{ t: "automatedTests" }, "JUnit 5", "xUnit", "pytest", "Vitest", "Playwright", "Testcontainers", { t: "a11yTesting" }] },
-  { group: "devops", items: ["Docker", "Docker Compose", "Git", "GitHub", "GitHub Actions", "Azure DevOps"] },
-  { group: "security", items: ["Keycloak", { t: "secretScanning" }, { t: "rbac" }] },
+  { group: "data", items: ["SQL", "PostgreSQL", "Flyway", "MongoDB", "Supabase", "Power BI"] },
+  { group: "testing", items: [{ t: "automatedTests" }, "JUnit 5", "xUnit", "pytest", "Vitest", "Playwright", "Testcontainers", "JaCoCo", { t: "a11yTesting" }] },
+  { group: "devops", items: ["Docker", "Docker Compose", "Maven", "Git", "GitHub", "GitHub Actions", "Azure DevOps"] },
+  { group: "security", items: ["Keycloak", "Spring Security", { t: "secretScanning" }, { t: "rbac" }] },
   { group: "ai", items: ["Claude", "Claude Code", "ChatGPT", "GitHub Copilot"] },
   { group: "users", items: [{ t: "usabilityTesting" }, { t: "userInterviews" }, { t: "figmaPrototypes" }, { t: "userCentredDesign" }, { t: "accessibleDesign" }] },
   { group: "languages", items: [{ t: "danish" }, { t: "english" }] }
@@ -240,6 +265,49 @@ const TEXT = {
           "database-url-password": "Password inside a database connection URL",
           "generic-secret-assignment": "Hard-coded password or secret"
         }
+      },
+      greenhour: {
+        title: "Pick a time and see the carbon intensity",
+        sample: "Sample data",
+        pick: "Pick a start time (a made-up day in eastern Denmark, DK2)",
+        cleanest: "cleanest",
+        unit: "g",
+        measured: "measured by Energinet",
+        forecast: "Energinet's forecast",
+        time: (h, m) => `${h}:${m}`,
+        num: n => n.toFixed(2),
+        barName: (time, g, cleanest) => `${time}, ${g} g CO₂ per kWh${cleanest ? ", cleanest" : ""}`,
+        result: (time, g, src, kr) => `${time}: ${g} g CO₂ per kWh (${src}). Spot price DKK ${kr} per kWh.`,
+        best: "That is the cleanest time in this sample.",
+        compare: (more, time) => `That is ${more} g more CO₂ per kWh than at ${time}, the cleanest time in this sample.`,
+        format: "The same quarter hour in GreenHour's format"
+      },
+      vikarbro: {
+        title: "Browse a shift and see how matching works",
+        sample: "Sample data",
+        pick: "Choose a shift",
+        needs: "Needs",
+        notes: { medRound: "Morning medication round", evening: "Evening shift", night: "Night shift" },
+        quals: { SOSU_HELPER: "Helper", SOSU_ASSISTANT: "Assistant", NURSE: "Nurse", MEDICATION: "Medication" },
+        qualLabels: { SOSU_HELPER: "social and healthcare helper", SOSU_ASSISTANT: "social and healthcare assistant", NURSE: "registered nurse", MEDICATION: "delegated medication handling" },
+        locale: "en-GB",
+        hours: n => `${Number.isInteger(n) ? n : n.toFixed(1)} h`,
+        candidates: "Candidates, in Vikarbro's order",
+        order: "Everyone who can take the shift comes first, then the fewest hours this week, so extra shifts are spread out.",
+        can: "Can take it",
+        cannot: "Can't take it",
+        week: h => `${h} this week`,
+        contract: h => `contract ${h}`,
+        // Messages from Vikarbro's own en.json
+        rules: {
+          MISSING_QUALIFICATION: p => `Missing qualification: ${p.qualification}`,
+          OVERLAP: p => `Already working ${p.start}–${p.end} that day`,
+          REST_PERIOD_AFTER: p => `Only ${p.rest} rest after the shift ending ${p.at} (${p.required} required)`,
+          REST_PERIOD_BEFORE: p => `Only ${p.rest} rest before the shift starting ${p.at} (${p.required} required)`,
+          WEEKLY_HOURS: p => `Would work ${p.hours} in week ${p.week} (contract limit ${p.limit})`
+        },
+        result: (shift, n, total) => `${shift}: ${n} of ${total} substitutes can take it.`,
+        format: "The shift in Vikarbro's format"
       }
     },
     skills: {
@@ -335,6 +403,62 @@ const TEXT = {
           { label: "Modes", text: "Command line tool, git pre-commit hook and GitHub Action. Output as text, JSON, or SARIF for GitHub code scanning." },
           { label: "Rules", text: "19 detection rules, from GitHub, AWS and Stripe keys to private key files and committed `.env` files." },
           { label: "Tests", text: "76 pytest tests. CI runs them on Python 3.10 to 3.13 with Ruff linting, fails below 90% coverage, then scans the repository's own history with the action." }
+        ]
+      },
+      greenhour: {
+        summary: "Electricity prices and CO₂ per kWh in Denmark change every 15 minutes. GreenHour finds the cheapest or cleanest time to start an appliance, using live data from Energinet.",
+        kind: "Planner for electricity prices and CO₂",
+        intro: [
+          "GreenHour shows today's and tomorrow's electricity prices for western and eastern Denmark in 15-minute steps, with the CO₂ per kWh on top.",
+          "You tell it which appliance you want to run and when it has to be done, and it finds the cheapest or cleanest start time. Every run is compared with just starting right away, and a history shows the money saved and CO₂ avoided over time."
+        ],
+        coverAlt: "GreenHour's prices page: four summary cards with the current price, the cheapest hour, the cheapest two hours and the day's average, above a bar chart of the price per quarter hour with a CO₂ line, where the cheapest two hours are marked and labelled \"Billigst\".",
+        images: [
+          {
+            alt: "GreenHour's public prices page for Tuesday 24 November in eastern Denmark (DK2). Four cards show the price right now, 1.75 kr. per kWh, the cheapest hour, 03.15 to 04.15, the cheapest two hours, 02.30 to 04.30, and the day's average, 1.92 kr. per kWh. Below them, a bar chart of the spot price for each quarter hour with a CO₂ line, and the cheapest period marked in a darker colour with the label \"Billigst\".",
+            caption: "The public prices page with live data for eastern Denmark on 24 November 2026. The cheapest period is labelled in the chart, not only coloured. The interface is in Danish, with English one click away."
+          },
+          {
+            alt: "A panel titled \"Hvor kommer tallene fra?\" listing four sources, each with a tag: the electricity price from Nord Pool via Energinet, CO₂ per kWh from Energinet, the cheapest two hours calculated by GreenHour, and grid tariffs, taxes and VAT from your grid company, which are not included.",
+            caption: "Every number says where it comes from. Grid tariffs, taxes and VAT are left out because they depend on the grid company, and the panel says so."
+          }
+        ],
+        features: [
+          { title: "Plans the best start time", text: "Every 15-minute boundary inside a window of up to 48 hours is a possible start. The backend adds up price × power for each option and can optimise for price, CO₂ or a balance of both. The result is always compared with starting as early as allowed." },
+          { title: "Live data with a fallback", text: "Every hour the backend imports day-ahead prices and measured and forecast CO₂ from Energi Data Service, and backs off when the API rate-limits. Measured CO₂ always replaces the forecast. Without internet, the app runs on demo data and says so." },
+          { title: "Clear about time and colour", text: "Everything is stored in UTC and shown in Danish time, and days with 23 or 25 hours have their own tests. Colour is never the only signal: the cheapest period, statuses and selected options also carry an icon or a text label." }
+        ],
+        runs: [
+          { label: "Services", text: "Four in Docker Compose: PostgreSQL 16, Keycloak, the Spring Boot API and the Angular app behind nginx." },
+          { label: "Pipeline", text: "GitHub Actions builds and tests the backend and frontend in parallel, then builds the Docker images when both pass." },
+          { label: "Tests", text: "JUnit 5 unit tests, integration tests against a real PostgreSQL 16 in Testcontainers, and Vitest for the frontend. The build fails below 80% line coverage." },
+          { label: "Data", text: "Prices and CO₂ from Energinet's Energi Data Service, which is open and needs no API key. A Power BI report reads from dedicated SQL views." }
+        ]
+      },
+      vikarbro: {
+        summary: "When someone calls in sick at a care home, the manager has to check every substitute by hand. Vikarbro shows who can legally take the shift, and why the others can't.",
+        kind: "Shift cover for care homes",
+        intro: [
+          "Vikarbro helps a care home manager fill a shift at short notice. The manager posts the shift and sees every substitute who can legally take it, plus the exact reason for everyone who can't.",
+          "Offers go out to several people at once, and the first to accept gets the shift. The system guarantees that two people can't both get it, and that nobody ends up double-booked."
+        ],
+        coverAlt: "Vikarbro's shift page: the shift's details on the left and a table of substitutes on the right, each marked \"Kan ikke\" (can't) with the reason, such as a missing qualification or too little rest.",
+        images: [
+          {
+            alt: "A shift page for Thursday 22 October, 15.00 to 23.00, that started without a substitute. On the left, the shift needs a nurse and two offers were declined or expired. On the right, a table titled \"Hvem kan tage den\" lists the substitutes with their qualifications and hours this week, and each one is marked \"Kan ikke\" with the reason, such as a missing nurse qualification or only 0 hours' rest after another shift.",
+            caption: "A shift that needed a nurse, from the demo data. Every substitute is listed with the exact reason they can't take it, and the fewest hours this week come first. The interface is in Danish, with English one click away."
+          }
+        ],
+        features: [
+          { title: "Working-time rules in plain words", text: "Every substitute is checked for qualifications, overlapping shifts, at least 11 hours' rest between shifts (Danish Working Environment Act, section 50) and the weekly hours in their contract. Everyone who can't take the shift gets the reason." },
+          { title: "First to accept gets the shift", text: "Three layers stop double bookings: a row lock on the substitute while they accept, optimistic locking on the shift, and a PostgreSQL exclusion constraint that makes overlapping shifts for one person impossible in the database itself." },
+          { title: "Re-check on accept", text: "An offer is a question, not a promise. When someone accepts, every rule is checked again against their bookings at that moment, so accepting fails with a reason instead of breaking the rules." }
+        ],
+        runs: [
+          { label: "Services", text: "Four in Docker Compose: PostgreSQL 16, Keycloak, the Spring Boot API and the Angular app behind nginx." },
+          { label: "Pipeline", text: "GitHub Actions builds and tests the backend and frontend in parallel, then builds the Docker images when both pass." },
+          { label: "Tests", text: "Unit tests for the rules engine, including the exact 11-hour boundary and ISO-week edges. Integration tests on PostgreSQL 16 in Testcontainers, including two substitutes accepting the same shift in parallel, where exactly one must win. The build fails below 80% line coverage." },
+          { label: "Design", text: "The rules engine is a plain Java class with no Spring or database. Keycloak has two roles, manager and substitute, and the interface is in Danish with English one click away." }
         ]
       }
     }
@@ -504,6 +628,49 @@ const TEXT = {
           "database-url-password": "Adgangskode i en URL til en database",
           "generic-secret-assignment": "Hardkodet adgangskode eller hemmelighed"
         }
+      },
+      greenhour: {
+        title: "Vælg et tidspunkt, og se CO₂-udledningen",
+        sample: "Eksempeldata",
+        pick: "Vælg et starttidspunkt (en opdigtet dag i Østdanmark, DK2)",
+        cleanest: "renest",
+        unit: "g",
+        measured: "målt af Energinet",
+        forecast: "Energinets prognose",
+        time: (h, m) => `${h}.${m}`,
+        num: n => n.toFixed(2).replace(".", ","),
+        barName: (time, g, cleanest) => `kl. ${time}, ${g} g CO₂ pr. kWh${cleanest ? ", renest" : ""}`,
+        result: (time, g, src, kr) => `Kl. ${time}: ${g} g CO₂ pr. kWh (${src}). Spotpris ${kr} kr. pr. kWh.`,
+        best: "Det er det reneste tidspunkt i eksemplet.",
+        compare: (more, time) => `Det er ${more} g mere CO₂ pr. kWh end kl. ${time}, som er det reneste tidspunkt i eksemplet.`,
+        format: "Det samme kvarter i GreenHours format"
+      },
+      vikarbro: {
+        title: "Vælg en vagt, og se, hvordan matchningen virker",
+        sample: "Eksempeldata",
+        pick: "Vælg en vagt",
+        needs: "Kræver",
+        notes: { medRound: "Medicinrunde om morgenen", evening: "Aftenvagt", night: "Nattevagt" },
+        quals: { SOSU_HELPER: "Hjælper", SOSU_ASSISTANT: "Assistent", NURSE: "Sygeplejerske", MEDICATION: "Medicin" },
+        qualLabels: { SOSU_HELPER: "social- og sundhedshjælper", SOSU_ASSISTANT: "social- og sundhedsassistent", NURSE: "sygeplejerske", MEDICATION: "delegeret medicinhåndtering" },
+        locale: "da-DK",
+        hours: n => `${Number.isInteger(n) ? n : n.toFixed(1).replace(".", ",")} t`,
+        candidates: "Kandidater i Vikarbros rækkefølge",
+        order: "Alle, der kan tage vagten, kommer først, og derefter dem med færrest timer i denne uge, så ekstravagterne bliver fordelt.",
+        can: "Kan tage den",
+        cannot: "Kan ikke tage den",
+        week: h => `${h} i denne uge`,
+        contract: h => `kontrakt ${h}`,
+        // Messages from Vikarbro's own da.json
+        rules: {
+          MISSING_QUALIFICATION: p => `Mangler kvalifikation: ${p.qualification}`,
+          OVERLAP: p => `Arbejder allerede ${p.start}–${p.end} den dag`,
+          REST_PERIOD_AFTER: p => `Kun ${p.rest} hvile efter vagten, der slutter ${p.at} (kræver ${p.required})`,
+          REST_PERIOD_BEFORE: p => `Kun ${p.rest} hvile før vagten, der starter ${p.at} (kræver ${p.required})`,
+          WEEKLY_HOURS: p => `Ville komme op på ${p.hours} i uge ${p.week} (højst ${p.limit} ifølge kontrakten)`
+        },
+        result: (shift, n, total) => `${shift}: ${n} af ${total} vikarer kan tage vagten.`,
+        format: "Vagten i Vikarbros format"
       }
     },
     skills: {
@@ -599,6 +766,62 @@ const TEXT = {
           { label: "Tilstande", text: "Kommandolinjeværktøj, git pre-commit hook og GitHub Action. Output som tekst, JSON eller SARIF til GitHub code scanning." },
           { label: "Regler", text: "19 regler, der finder alt fra GitHub-, AWS- og Stripe-nøgler til private nøglefiler og committede `.env`-filer." },
           { label: "Tests", text: "76 pytest-tests. CI kører dem på Python 3.10 til 3.13 med Ruff-linting, fejler under 90 % dækning og scanner derefter repositoryets egen historik med actionen." }
+        ]
+      },
+      greenhour: {
+        summary: "Elprisen og CO₂ pr. kWh i Danmark ændrer sig hvert kvarter. GreenHour finder det billigste eller reneste tidspunkt at starte et apparat på, ud fra live data fra Energinet.",
+        kind: "Planlægning efter elpris og CO₂",
+        intro: [
+          "GreenHour viser dagens og morgendagens elpriser for Vest- og Østdanmark kvarter for kvarter med CO₂ pr. kWh ovenpå.",
+          "Du fortæller, hvilket apparat du vil køre, og hvornår det skal være færdigt, og så finder GreenHour det billigste eller reneste starttidspunkt. Hver kørsel bliver sammenlignet med at starte med det samme, og en historik viser, hvor mange penge og hvor meget CO₂ du har sparet over tid."
+        ],
+        coverAlt: "GreenHours prisside: fire kort med prisen lige nu, den billigste time, de billigste 2 timer og gennemsnittet for dagen over et søjlediagram med prisen for hvert kvarter og en CO₂-linje, hvor de billigste 2 timer er markeret og mærket \"Billigst\".",
+        images: [
+          {
+            alt: "GreenHours offentlige prisside for tirsdag 24. november i Østdanmark (DK2). Fire kort viser prisen lige nu, 1,75 kr. pr. kWh, den billigste time, 03.15 til 04.15, de billigste 2 timer, 02.30 til 04.30, og gennemsnittet for dagen, 1,92 kr. pr. kWh. Under dem er et søjlediagram over spotprisen for hvert kvarter med en CO₂-linje, hvor den billigste periode er markeret med en mørkere farve og mærket \"Billigst\".",
+            caption: "Den offentlige prisside med live data for Østdanmark den 24. november 2026. Den billigste periode er mærket med tekst i diagrammet, ikke kun med farve. Brugerfladen er på dansk, og engelsk er ét klik væk."
+          },
+          {
+            alt: "Et panel med overskriften \"Hvor kommer tallene fra?\", der viser fire kilder, hver med et mærke: elprisen fra Nord Pool via Energinet, CO₂ pr. kWh fra Energinet, de billigste 2 timer beregnet af GreenHour og nettarif, afgifter og moms fra dit netselskab, som ikke er med i tallene.",
+            caption: "Hvert tal fortæller, hvor det kommer fra. Nettarif, afgifter og moms er ikke med, fordi de afhænger af netselskabet, og det står der også i panelet."
+          }
+        ],
+        features: [
+          { title: "Finder det bedste starttidspunkt", text: "Hvert kvarter inden for et vindue på op til 48 timer er et muligt starttidspunkt. Backenden lægger pris × effekt sammen for hver mulighed og kan optimere efter pris, CO₂ eller en balance mellem dem. Resultatet bliver altid sammenlignet med at starte så tidligt som muligt." },
+          { title: "Live data med en reserve", text: "Hver time henter backenden spotpriser og målt og forventet CO₂ fra Energi Data Service og venter længere mellem forsøgene, når API'et begrænser antallet af kald. Målt CO₂ erstatter altid prognosen. Uden internet kører appen på demodata og siger det." },
+          { title: "Tydelig om tid og farver", text: "Alt bliver gemt i UTC og vist i dansk tid, og dage med 23 eller 25 timer har deres egne tests. Farve er aldrig det eneste signal: Den billigste periode, statusser og valgte muligheder har også et ikon eller en tekst." }
+        ],
+        runs: [
+          { label: "Tjenester", text: "Fire i Docker Compose: PostgreSQL 16, Keycloak, Spring Boot-API'et og Angular-appen bag nginx." },
+          { label: "Pipeline", text: "GitHub Actions bygger og tester backend og frontend parallelt og bygger derefter Docker-images, når begge er grønne." },
+          { label: "Tests", text: "Unittests i JUnit 5, integrationstests mod en rigtig PostgreSQL 16 i Testcontainers og Vitest til frontenden. Buildet fejler under 80 % linjedækning." },
+          { label: "Data", text: "Priser og CO₂ fra Energinets Energi Data Service, som er åben og ikke kræver en API-nøgle. En Power BI-rapport læser fra særlige SQL-views." }
+        ]
+      },
+      vikarbro: {
+        summary: "Når nogen melder sig syg på et plejehjem, skal lederen tjekke hver vikar i hånden. Vikarbro viser, hvem der lovligt kan tage vagten, og hvorfor de andre ikke kan.",
+        kind: "Vikardækning til plejehjem",
+        intro: [
+          "Vikarbro hjælper en leder på et plejehjem med at få dækket en vagt med kort varsel. Lederen opretter vagten og ser alle vikarer, der lovligt kan tage den, og den præcise grund for alle, der ikke kan.",
+          "Tilbuddet går ud til flere på én gang, og den første, der siger ja, får vagten. Systemet sikrer, at to personer ikke begge kan få den, og at ingen bliver dobbeltbooket."
+        ],
+        coverAlt: "Vikarbros vagtside: vagtens detaljer til venstre og en tabel over vikarer til højre, hvor hver er markeret \"Kan ikke\" med grunden, fx en manglende kvalifikation eller for lidt hvile.",
+        images: [
+          {
+            alt: "En vagtside for torsdag 22. oktober kl. 15.00 til 23.00, der startede uden vikar. Til venstre kræver vagten en sygeplejerske, og to tilbud er blevet afvist eller er udløbet. Til højre viser en tabel med overskriften \"Hvem kan tage den\" vikarerne med deres kvalifikationer og timer i denne uge, og hver af dem er markeret \"Kan ikke\" med grunden, fx manglende kvalifikation som sygeplejerske eller kun 0 timers hvile efter en anden vagt.",
+            caption: "En vagt, der krævede en sygeplejerske, fra demodata. Alle vikarer står på listen med den præcise grund til, at de ikke kan tage den, og dem med færrest timer i denne uge står øverst. Brugerfladen er på dansk, og engelsk er ét klik væk."
+          }
+        ],
+        features: [
+          { title: "Arbejdstidsregler i almindelige ord", text: "Hver vikar bliver tjekket for kvalifikationer, overlappende vagter, mindst 11 timers hvile mellem vagter (arbejdsmiljølovens § 50) og ugens timer i kontrakten. Alle, der ikke kan tage vagten, får grunden at vide." },
+          { title: "Den første, der siger ja, får vagten", text: "Tre lag forhindrer dobbeltbookinger: en rækkelås på vikaren, mens vedkommende siger ja, optimistisk låsning på vagten og en exclusion constraint i PostgreSQL, der gør overlappende vagter for den samme person umulige i selve databasen." },
+          { title: "Tjekker igen ved ja", text: "Et tilbud er et spørgsmål, ikke et løfte. Når nogen siger ja, bliver alle regler tjekket igen mod vedkommendes vagter lige nu, så et ja fejler med en grund i stedet for at bryde reglerne." }
+        ],
+        runs: [
+          { label: "Tjenester", text: "Fire i Docker Compose: PostgreSQL 16, Keycloak, Spring Boot-API'et og Angular-appen bag nginx." },
+          { label: "Pipeline", text: "GitHub Actions bygger og tester backend og frontend parallelt og bygger derefter Docker-images, når begge er grønne." },
+          { label: "Tests", text: "Unittests af regelmotoren, også den præcise grænse på 11 timer og ugeskift efter ISO-uger. Integrationstests på PostgreSQL 16 i Testcontainers, blandt andet to vikarer, der siger ja til den samme vagt samtidig, hvor præcis én skal vinde. Buildet fejler under 80 % linjedækning." },
+          { label: "Opbygning", text: "Regelmotoren er en almindelig Java-klasse uden Spring eller database. Keycloak har to roller, leder og vikar, og brugerfladen er på dansk med engelsk ét klik væk." }
         ]
       }
     }
@@ -1186,25 +1409,176 @@ function demoLeakwatch(root) {
   area.addEventListener("input", () => { if (scanned) msg.textContent = d.stale; });
 }
 
-function demoSection(kind) {
-  const ui = t().ui, d = t().demos[kind];
-  const body = kind === "barrierefri"
-    ? `<div class="bf-demo"><div class="bf-side"></div><div class="bf-mapwrap">${bfMap(d)}</div></div>`
-    : `<div class="lw-demo">
+/* ---------- Demo: GreenHour, pick a time and see the CO₂ ----------
+   Made-up quarter hours in the shape of GreenHour's /api/market slots
+   (start in UTC, priceDkkPerKwh, co2GramsPerKwh, co2Forecast). Danish time is UTC+1 in winter. */
+const GH_SLOTS = [
+  { start: "2026-12-01T23:00:00Z", priceDkkPerKwh: 1.42, co2GramsPerKwh: 38, co2Forecast: false },
+  { start: "2026-12-02T02:00:00Z", priceDkkPerKwh: 1.31, co2GramsPerKwh: 34, co2Forecast: false },
+  { start: "2026-12-02T05:00:00Z", priceDkkPerKwh: 1.88, co2GramsPerKwh: 62, co2Forecast: false },
+  { start: "2026-12-02T08:00:00Z", priceDkkPerKwh: 2.21, co2GramsPerKwh: 91, co2Forecast: false },
+  { start: "2026-12-02T11:00:00Z", priceDkkPerKwh: 1.74, co2GramsPerKwh: 118, co2Forecast: true },
+  { start: "2026-12-02T14:00:00Z", priceDkkPerKwh: 2.05, co2GramsPerKwh: 104, co2Forecast: true },
+  { start: "2026-12-02T17:00:00Z", priceDkkPerKwh: 2.84, co2GramsPerKwh: 96, co2Forecast: true },
+  { start: "2026-12-02T20:00:00Z", priceDkkPerKwh: 1.97, co2GramsPerKwh: 71, co2Forecast: true }
+];
+// "HH", "MM" in Danish time (UTC+1 for these December dates)
+const ghClock = start => { const d = new Date(Date.parse(start) + 3600e3); return [String(d.getUTCHours()).padStart(2, "0"), String(d.getUTCMinutes()).padStart(2, "0")]; };
+
+function demoGreenhour(root) {
+  const d = t().demos.greenhour, msg = root.querySelector(".demo-msg");
+  const max = Math.max(...GH_SLOTS.map(x => x.co2GramsPerKwh));
+  const best = GH_SLOTS.reduce((a, b) => b.co2GramsPerKwh < a.co2GramsPerKwh ? b : a);
+  const time = x => d.time(...ghClock(x.start));
+  const bars = root.querySelector(".gh-bars");
+  bars.innerHTML = GH_SLOTS.map((x, i) => `
+    <li><button type="button" class="gh-bar" data-i="${i}" aria-pressed="false" aria-label="${esc(d.barName(time(x), x.co2GramsPerKwh, x === best))}">
+      <span class="gh-val" aria-hidden="true">${x.co2GramsPerKwh} ${esc(d.unit)}</span>
+      <span class="gh-col" aria-hidden="true"><span style="height:${Math.round(x.co2GramsPerKwh / max * 100)}%"></span></span>
+      <span class="gh-time" aria-hidden="true">${esc(time(x))}</span>
+      ${x === best ? `<span class="gh-tag" aria-hidden="true">${esc(d.cleanest)}</span>` : ""}
+    </button></li>`).join("");
+  bars.addEventListener("click", e => {
+    const btn = e.target.closest(".gh-bar");
+    if (!btn) return;
+    const x = GH_SLOTS[btn.dataset.i];
+    bars.querySelectorAll(".gh-bar").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    const text = d.result(time(x), x.co2GramsPerKwh, x.co2Forecast ? d.forecast : d.measured, d.num(x.priceDkkPerKwh)) + " " +
+      (x === best ? d.best : d.compare(x.co2GramsPerKwh - best.co2GramsPerKwh, time(best)));
+    root.querySelector(".gh-out").hidden = false;
+    root.querySelector(".gh-json").textContent = JSON.stringify(x, null, 2);
+    msg.textContent = ""; requestAnimationFrame(() => { msg.textContent = text; });
+  });
+}
+
+/* ---------- Demo: Vikarbro, who can take this shift? ----------
+   The four checks from Vikarbro's WorkingTimeRules.java and the ordering from
+   ShiftService.java, on made-up shifts and substitutes. Field names as in Shift.java and
+   Substitute.java. Times are Danish local time; the sample week has no clock change. */
+const VB_MIN_REST_H = 11;
+const VB_SHIFTS = [
+  { id: 1, note: "medRound", startsAt: "2026-12-09T07:00", endsAt: "2026-12-09T15:00", requiredQualifications: ["SOSU_ASSISTANT", "MEDICATION"] },
+  { id: 2, note: "evening", startsAt: "2026-12-09T15:00", endsAt: "2026-12-09T23:00", requiredQualifications: ["SOSU_HELPER"] },
+  { id: 3, note: "night", startsAt: "2026-12-10T23:00", endsAt: "2026-12-11T07:00", requiredQualifications: ["NURSE"] }
+];
+const VB_SUBSTITUTES = [
+  { name: "Sara M.", qualifications: ["SOSU_HELPER", "SOSU_ASSISTANT", "MEDICATION"], maxWeeklyHours: 37, shifts: [["2026-12-07T07:00", "2026-12-07T15:00"], ["2026-12-08T15:00", "2026-12-08T23:00"]] },
+  { name: "Mikkel H.", qualifications: ["SOSU_HELPER"], maxWeeklyHours: 30, shifts: [["2026-12-07T07:00", "2026-12-07T15:00"], ["2026-12-08T07:00", "2026-12-08T15:00"], ["2026-12-10T07:00", "2026-12-10T15:00"]] },
+  { name: "Nadia K.", qualifications: ["SOSU_ASSISTANT", "NURSE", "MEDICATION"], maxWeeklyHours: 37, shifts: [["2026-12-09T12:00", "2026-12-09T20:00"]] },
+  { name: "Peter L.", qualifications: ["SOSU_HELPER", "SOSU_ASSISTANT", "MEDICATION"], maxWeeklyHours: 25, shifts: [["2026-12-07T07:00", "2026-12-07T15:00"], ["2026-12-08T07:00", "2026-12-08T15:00"]] },
+  { name: "Line B.", qualifications: ["SOSU_HELPER", "SOSU_ASSISTANT"], maxWeeklyHours: 37, shifts: [] },
+  { name: "Omar R.", qualifications: ["NURSE"], maxWeeklyHours: 37, shifts: [["2026-12-11T07:00", "2026-12-11T15:00"]] }
+];
+const vbMs = v => Date.parse(v + ":00Z");  // local times are handled as if UTC, so no clock shifts apply
+const vbHours = ms => ms / 3600e3;
+function vbIsoWeek(v) {  // [ISO week-based year, week number]
+  const d = new Date(vbMs(v)); d.setUTCHours(0, 0, 0, 0);
+  d.setUTCDate(d.getUTCDate() + 3 - (d.getUTCDay() + 6) % 7);  // the Thursday of this week
+  const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  return [d.getUTCFullYear(), 1 + Math.round(((d - firstThursday) / 86400e3 - 3 + (firstThursday.getUTCDay() + 6) % 7) / 7)];
+}
+// Hours already worked in the ISO week the shift starts in (WorkingTimeRules.hoursInWeekOf).
+function vbHoursInWeek(person, shift) {
+  const [y, w] = vbIsoWeek(shift.startsAt);
+  return person.shifts.filter(([a]) => { const [y2, w2] = vbIsoWeek(a); return y2 === y && w2 === w; })
+    .reduce((sum, [a, b]) => sum + vbHours(vbMs(b) - vbMs(a)), 0);
+}
+// Returns every violation, like WorkingTimeRules.check().
+function vbCheck(person, shift) {
+  const v = [], start = vbMs(shift.startsAt), end = vbMs(shift.endsAt), minRest = VB_MIN_REST_H * 3600e3;
+  shift.requiredQualifications.filter(q => !person.qualifications.includes(q)).forEach(q => v.push({ rule: "MISSING_QUALIFICATION", q }));
+  for (const [a, b] of person.shifts) {
+    const oStart = vbMs(a), oEnd = vbMs(b);
+    if (oStart < end && start < oEnd) { v.push({ rule: "OVERLAP", a, b }); continue; }
+    if (oEnd <= start) { if (start - oEnd < minRest) v.push({ rule: "REST_PERIOD_AFTER", rest: start - oEnd, at: b }); }
+    else if (oStart - end < minRest) v.push({ rule: "REST_PERIOD_BEFORE", rest: oStart - end, at: a });
+  }
+  const week = vbHoursInWeek(person, shift) + vbHours(end - start);
+  if (week > person.maxWeeklyHours) v.push({ rule: "WEEKLY_HOURS", hours: week, week: vbIsoWeek(shift.startsAt)[1], limit: person.maxWeeklyHours });
+  return v;
+}
+
+function demoVikarbro(root) {
+  const d = t().demos.vikarbro, msg = root.querySelector(".demo-msg");
+  const fmt = (v, opts) => new Intl.DateTimeFormat(d.locale, { timeZone: "UTC", ...opts }).format(new Date(vbMs(v)));
+  const clock = v => fmt(v, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  const dayTime = v => `${fmt(v, { weekday: "short", day: "numeric", month: "short" })} ${clock(v)}`;
+  const when = s => `${fmt(s.startsAt, { weekday: "short", day: "numeric", month: "short" })}, ${clock(s.startsAt)}–${clock(s.endsAt)}`;
+  const reason = x => d.rules[x.rule]({
+    qualification: x.q && d.qualLabels[x.q], start: x.a && clock(x.a), end: x.b && clock(x.b),
+    rest: x.rest !== undefined && d.hours(vbHours(x.rest)), at: x.at && dayTime(x.at), required: d.hours(VB_MIN_REST_H),
+    hours: x.hours && d.hours(x.hours), week: x.week, limit: x.limit && d.hours(x.limit)
+  });
+  const pills = qs => `<ul class="pills">${qs.map(q => `<li>${esc(d.quals[q])}</li>`).join("")}</ul>`;
+
+  root.querySelector(".vb-shifts").innerHTML = VB_SHIFTS.map(s => `
+    <li><button type="button" class="vb-shift" data-id="${s.id}" aria-pressed="false">
+      <strong>${esc(d.notes[s.note])}</strong><span>${esc(when(s))}</span>
+      <span class="vb-needs">${esc(d.needs)}: ${s.requiredQualifications.map(q => esc(d.quals[q])).join(", ")}</span>
+    </button></li>`).join("");
+
+  root.querySelector(".vb-shifts").addEventListener("click", e => {
+    const btn = e.target.closest(".vb-shift");
+    if (!btn) return;
+    const shift = VB_SHIFTS.find(s => s.id === Number(btn.dataset.id));
+    root.querySelectorAll(".vb-shift").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    // Same order as ShiftService: eligible first, then fewest hours this week, then name.
+    const rows = VB_SUBSTITUTES.map(p => ({ p, v: vbCheck(p, shift), week: vbHoursInWeek(p, shift) }))
+      .sort((a, b) => (a.v.length > 0) - (b.v.length > 0) || a.week - b.week || a.p.name.localeCompare(b.p.name));
+    const out = root.querySelector(".vb-out");
+    out.hidden = false;
+    out.innerHTML = `
+      <h5>${esc(d.candidates)}</h5>
+      <p class="vb-order">${esc(d.order)}</p>
+      <ol class="vb-list">${rows.map(r => `
+        <li class="${r.v.length ? "vb-no" : "vb-yes"}">
+          <div class="vb-head"><strong>${esc(r.p.name)}</strong>
+            <span class="vb-badge">${r.v.length
+              ? `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${esc(d.cannot)}`
+              : `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(d.can)}`}</span></div>
+          <p class="vb-meta">${esc(d.week(d.hours(r.week)))} · ${esc(d.contract(d.hours(r.p.maxWeeklyHours)))}</p>
+          ${pills(r.p.qualifications)}
+          ${r.v.length ? `<ul class="vb-reasons">${r.v.map(x => `<li>${esc(reason(x))}</li>`).join("")}</ul>` : ""}
+        </li>`).join("")}
+      </ol>
+      <h6>${esc(d.format)}</h6>
+      <pre class="lw-pre vb-json">${esc(JSON.stringify(shift, (k, v) => k === "note" ? d.notes[v] : v, 2))}</pre>`;
+    const ok = rows.filter(r => !r.v.length).length;
+    msg.textContent = ""; requestAnimationFrame(() => { msg.textContent = d.result(d.notes[shift.note], ok, rows.length); });
+  });
+}
+
+const DEMO_BODIES = {
+  barrierefri: d => `<div class="bf-demo"><div class="bf-side"></div><div class="bf-mapwrap">${bfMap(d)}</div></div>`,
+  leakwatch: d => `<div class="lw-demo">
         <label for="lwCode">${esc(d.label)}</label>
         <textarea id="lwCode" class="lw-code" rows="12" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
         <button type="button" class="btn btn-light lw-scan">${esc(d.scan)}</button>
         <div class="lw-results" hidden></div>
-      </div>`;
+      </div>`,
+  greenhour: d => `<div class="gh-demo">
+        <p class="demo-tag">${esc(d.sample)}</p>
+        <fieldset><legend>${esc(d.pick)}</legend><ul class="gh-bars"></ul></fieldset>
+        <div class="gh-out" hidden><h5>${esc(d.format)}</h5><pre class="lw-pre gh-json"></pre></div>
+      </div>`,
+  vikarbro: d => `<div class="vb-demo">
+        <p class="demo-tag">${esc(d.sample)}</p>
+        <fieldset><legend>${esc(d.pick)}</legend><ul class="vb-shifts"></ul></fieldset>
+        <div class="vb-out" hidden></div>
+      </div>`
+};
+
+function demoSection(kind) {
+  const ui = t().ui, d = t().demos[kind];
   return `<section class="ov-section demo" data-demo="${kind}">
     <h3>${esc(ui.tryIt)}</h3>
     <h4 class="demo-title">${esc(d.title)}</h4>
-    ${body}
+    ${DEMO_BODIES[kind](d)}
     <p class="demo-msg" role="status" aria-live="polite"></p>
     <p class="demo-note">${esc(ui.demoNote)}</p>
   </section>`;
 }
-const DEMOS = { barrierefri: demoBarrierefri, leakwatch: demoLeakwatch };
+const DEMOS = { barrierefri: demoBarrierefri, leakwatch: demoLeakwatch, greenhour: demoGreenhour, vikarbro: demoVikarbro };
 
 /* ---------- Project view (full-screen dialog) ---------- */
 (function projectOverlay() {
