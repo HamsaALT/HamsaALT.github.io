@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg { fill: #0b0b0c; }
+    .h { fill: #ff7a1a; }
+    @media (prefers-color-scheme: light) { .bg { fill: #ffffff; stroke: #e2e2df; } .h { fill: #ad4900; } }
+  </style>
+  <rect class="bg" x="0.5" y="0.5" width="31" height="31" rx="8"/>
+  <path class="h" d="M9 7h4v7h6V7h4v18h-4v-7h-6v7H9z"/>
+</svg>

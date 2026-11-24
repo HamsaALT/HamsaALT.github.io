@@ -8,7 +8,8 @@
 //   status  "finished" or "inProgress"
 //   tech    4-7 tags (names of tech stay the same in every language)
 //   cover   image at the top of the card
-//   images  screenshots in the project view (alt text and captions are in TEXT)
+//   images  screenshots in the project view (alt text and captions are in TEXT);
+//           credit: "osm" adds the OpenStreetMap credit line under a map screenshot
 //   demo    optional interactive demo at the bottom of the project view
 const PROJECTS = [
   {
@@ -17,9 +18,9 @@ const PROJECTS = [
     status: "finished",
     tech: ["C#", ".NET", "React", "TypeScript", "PostgreSQL", "Keycloak", "xUnit"],
     code: "https://github.com/HamsaALT/barrierefri",
-    cover: { src: "images/projects/barrierefri/card.jpg", width: 832, height: 520 },
+    cover: { src: "images/projects/barrierefri/card.jpg", width: 800, height: 500 },
     images: [
-      { src: "images/projects/barrierefri/map.jpg", width: 1280, height: 800 },
+      { src: "images/projects/barrierefri/map.jpg", width: 1280, height: 800, credit: "osm" },
       { src: "images/projects/barrierefri/cases.jpg", width: 1280, height: 800 },
       { src: "images/projects/barrierefri/report-form.jpg", width: 1280, height: 900 }
     ],
@@ -43,7 +44,7 @@ const PROJECT_PLACEHOLDERS = 3;
 // Add certificates here later, e.g. { title: "Azure Fundamentals (AZ-900)", issuer: "Microsoft", year: 2027 }
 const CERTIFICATES = [];
 
-// "Skills and tools": one card per group. Names of tech are written here; items that
+// "What I work with": one card per group. Names of tech are written here; items that
 // need translating are written as { t: "key" } and their text is in TEXT (skills.items).
 const SKILLS = [
   { group: "code", items: ["Java", "Spring Boot", "C#", ".NET", "ASP.NET Core", "Python", "TypeScript", "JavaScript", "React", "Angular", "Node.js", "Express", "HTML", "CSS", "C"] },
@@ -51,7 +52,7 @@ const SKILLS = [
   { group: "testing", items: [{ t: "automatedTests" }, "JUnit 5", "xUnit", "pytest", "Vitest", "Playwright", "Testcontainers", { t: "a11yTesting" }] },
   { group: "devops", items: ["Docker", "Docker Compose", "Git", "GitHub", "GitHub Actions", "Azure DevOps"] },
   { group: "security", items: ["Keycloak", { t: "secretScanning" }, { t: "rbac" }] },
-  { group: "ai", items: ["Claude", "Claude Code", "GitHub Copilot", "ChatGPT"] },
+  { group: "ai", items: ["Claude", "Claude Code", "ChatGPT", "GitHub Copilot"] },
   { group: "users", items: [{ t: "usabilityTesting" }, { t: "userInterviews" }, { t: "figmaPrototypes" }, { t: "userCentredDesign" }, { t: "accessibleDesign" }] },
   { group: "languages", items: [{ t: "danish" }, { t: "english" }] }
 ];
@@ -102,7 +103,7 @@ const TEXT = {
       scrollHint: "SCROLL",
       aboutLabel: "About me",
       aboutP1: "I study Software Engineering at Aalborg University Copenhagen, and I like building things that solve real problems for real people. I enjoy the whole journey from idea to working software: finding out what users actually need, designing a solution in Figma, and building it with a solid backend.",
-      aboutP2: "Alongside my studies, I work as a security guard and as an on-call patient sitter in healthcare. Those jobs have taught me responsibility and calm under pressure, and many of my project ideas start there.",
+      aboutP2: "Alongside my studies, I work as a security guard. Before that, I worked in healthcare as a patient sitter at DOUS and in service and logistics at Gentofte Hospital. Those jobs have taught me responsibility and calm under pressure, and many of my project ideas start there.",
       quote: "“Turning real problems into clean, useful software.”",
       cvButton: "Ask for my CV",
       viewProjects: "View Projects",
@@ -115,7 +116,7 @@ const TEXT = {
       tabsLabel: "Portfolio sections",
       tabProjects: "Projects",
       tabCertificates: "Certificates",
-      skillsTitle: 'Skills and <span class="accent">tools</span>',
+      skillsTitle: 'What I <span class="accent">work with</span>',
       workTitle: 'Where I have <span class="accent">worked</span>',
       workNote: "Part-time, alongside my studies",
       eduTitle: "Education",
@@ -139,8 +140,8 @@ const TEXT = {
       nowText: "What I'm busy with this semester.",
       nowStudyingLabel: "Studying",
       nowStudying: "BSc in Software Engineering, Aalborg University Copenhagen",
-      nowBuildingLabel: "Building",
-      nowBuilding: "This portfolio, and my first project in C# and .NET",
+      nowBuildingLabel: "Project",
+      nowBuilding: "Working on my third semester project at AAU, a student presenter coordination system.",
       nowLearningLabel: "Learning",
       nowLearning: "C#, .NET, Azure and Python",
       nowAvailableLabel: "Available",
@@ -159,6 +160,8 @@ const TEXT = {
       seeProject: "See the project",
       seeCode: "See the code",
       seeCodeHint: " (GitHub, opens in a new tab)",
+      osmCredit: ["Map data ©", "OpenStreetMap contributors"],
+      newTab: " (opens in a new tab)",
       screenshots: "Screenshots",
       whatItDoes: "What it does",
       howItRuns: "How it runs",
@@ -205,7 +208,7 @@ const TEXT = {
         status: "Status",
         history: "History",
         reported: "Reported",
-        actions: { InProgress: "Start repair", Resolved: "Mark as fixed", Rejected: "Close with a note", Open: "Reopen" },
+        actions: { InProgress: "Start fixing", Resolved: "Mark fixed", Rejected: "Close with a note", Open: "Reopen" },
         noteLabel: "Note to the public (required)",
         noteConfirm: "Close the report",
         noteCancel: "Cancel",
@@ -252,13 +255,13 @@ const TEXT = {
       },
       items: {
         automatedTests: "Automated tests",
-        a11yTesting: "Accessibility testing (WCAG 2.2 AA)",
-        secretScanning: "Secret scanning",
-        rbac: "Role-based access",
         usabilityTesting: "Usability testing",
         userInterviews: "User interviews",
         figmaPrototypes: "Figma prototypes",
         userCentredDesign: "User-centred design",
+        a11yTesting: "Accessibility testing (WCAG 2.2 AA)",
+        secretScanning: "Secret scanning",
+        rbac: "Role-based access",
         accessibleDesign: "Accessible design",
         danish: "Danish (native)",
         english: "English (fluent)"
@@ -352,8 +355,8 @@ const TEXT = {
       navWork: "Arbejde",
       navContact: "Kontakt",
       heroLabel: '<span class="accent">✦</span> Søger studiejob og praktik',
-      heroTitle: '<span>Software-</span><span class="dim">ingeniør</span>',
-      typedLabel: "Softwarestuderende, C#- og Java-udvikler, bygger med UX for øje, bor i København",
+      heroTitle: '<span>Software-</span><span class="dim">udvikler</span>',
+      typedLabel: "Softwarestuderende, C#- og Java-udvikler, tænker i brugeroplevelse, når jeg bygger, bor i København",
       heroDesc: "Jeg bygger moderne og brugervenlig software, fra research og prototyper i Figma til solide backends. Jeg læser software på Aalborg Universitet København.",
       hintWork: '<span class="accent">↓</span> se mit arbejde længere nede',
       hintOpen: '<span class="accent">↗</span> søger studiejob og praktik',
@@ -364,7 +367,7 @@ const TEXT = {
       scrollHint: "SCROLL",
       aboutLabel: "Om mig",
       aboutP1: "Jeg læser software på Aalborg Universitet København, og jeg kan godt lide at bygge ting, der løser rigtige problemer for rigtige mennesker. Jeg kan lide hele vejen fra idé til software, der virker: at finde ud af, hvad brugerne faktisk har brug for, designe en løsning i Figma og bygge den med en solid backend.",
-      aboutP2: "Ved siden af studiet arbejder jeg som vagt og som fastvagt i sundhedsvæsenet. De job har lært mig at tage ansvar og bevare roen under pres, og mange af mine projektidéer starter dér.",
+      aboutP2: "Ved siden af studiet arbejder jeg som sikkerhedsvagt. Før det arbejdede jeg i sundhedsvæsenet, som tilkaldevagt hos DOUS og med service og logistik på Gentofte Hospital. De job har lært mig at tage ansvar og bevare roen under pres, og mange af mine projektidéer starter dér.",
       quote: "„Jeg gør rigtige problemer til enkel og brugbar software.“",
       cvButton: "Bed om mit CV",
       viewProjects: "Se projekter",
@@ -377,7 +380,7 @@ const TEXT = {
       tabsLabel: "Dele af portfolioen",
       tabProjects: "Projekter",
       tabCertificates: "Certifikater",
-      skillsTitle: 'Kompetencer og <span class="accent">værktøjer</span>',
+      skillsTitle: 'Det <span class="accent">arbejder jeg med</span>',
       workTitle: 'Hvor jeg har <span class="accent">arbejdet</span>',
       workNote: "Deltid, ved siden af studiet",
       eduTitle: "Uddannelse",
@@ -401,11 +404,11 @@ const TEXT = {
       nowText: "Det har jeg gang i dette semester.",
       nowStudyingLabel: "Studerer",
       nowStudying: "Bachelor i software, Aalborg Universitet København",
-      nowBuildingLabel: "Bygger",
-      nowBuilding: "Denne portfolio og mit første projekt i C# og .NET",
+      nowBuildingLabel: "Projekt",
+      nowBuilding: "Arbejder på mit projekt på 3. semester på AAU: et system til at koordinere studerende, der holder oplæg.",
       nowLearningLabel: "Lærer",
       nowLearning: "C#, .NET, Azure og Python",
-      nowAvailableLabel: "Ledig",
+      nowAvailableLabel: "Søger studiejob",
       nowAvailable: "10–15 timer om ugen, fleksibelt omkring eksamener",
       nowLanguagesLabel: "Sprog",
       nowLanguages: "Dansk og engelsk, begge flydende",
@@ -414,13 +417,15 @@ const TEXT = {
       overlayClose: "Luk",
       overlayCloseHint: " projektet"
     },
-    typed: ["softwarestuderende", "c#- og java-udvikler", "bygger med ux for øje", "bor i københavn"],
+    typed: ["softwarestuderende", "c#- og java-udvikler", "tænker i brugeroplevelse, når jeg bygger", "bor i københavn"],
     ui: {
       pageTitle: "Hamsa Hassan – portfolio",
       status: { finished: "Færdig", inProgress: "I gang" },
       seeProject: "Se projektet",
       seeCode: "Se koden",
       seeCodeHint: " (GitHub, åbner i en ny fane)",
+      osmCredit: ["Kortdata ©", "OpenStreetMap-bidragydere"],
+      newTab: " (åbner i en ny fane)",
       screenshots: "Skærmbilleder",
       whatItDoes: "Det kan den",
       howItRuns: "Sådan kører den",
@@ -436,7 +441,7 @@ const TEXT = {
     },
     demos: {
       barrierefri: {
-        title: "Meld en barriere, og følg den gennem sagskøen",
+        title: "Meld en barriere, og følg sagen hele vejen",
         step1: "1. Hvad er problemet?",
         step2: "2. Hvor er det?",
         // Labels and hints from Barrierefri's own da.json.
@@ -460,7 +465,7 @@ const TEXT = {
         needCategory: "Vælg, hvad problemet er (trin 1).",
         needPlace: "Sæt nålen på kortet (trin 2).",
         sent: (cat, place) => `Meldingen er sendt: ${cat}, ${place}. Status: Åben.`,
-        queue: "Sagskø",
+        queue: "Sagsoversigt",
         place: "Sted",
         deadline: "Frist",
         days: n => `${n} ${n === 1 ? "dag" : "dage"} (Barrierefris eget mål for denne kategori)`,
@@ -488,8 +493,8 @@ const TEXT = {
         stale: "Du har ændret koden. Tryk på Scan igen for at opdatere resultatet.",
         highlighted: "Koden med fundene markeret",
         findings: "Fund",
-        severity: { critical: "kritisk", high: "høj", medium: "middel" },
-        count: (sev, n) => `${n} ${n === 1 ? { critical: "kritisk", high: "høj", medium: "middel" }[sev] : { critical: "kritiske", high: "høje", medium: "middel" }[sev]}`,
+        severity: { critical: "kritisk", high: "høj", medium: "mellem" },
+        count: (sev, n) => `${n} ${n === 1 ? { critical: "kritisk", high: "høj", medium: "mellem" }[sev] : { critical: "kritiske", high: "høje", medium: "mellem" }[sev]}`,
         lineCol: (l, c) => `linje ${l}, kolonne ${c}`,
         value: "værdi",
         rules: {
@@ -514,13 +519,13 @@ const TEXT = {
       },
       items: {
         automatedTests: "Automatiserede tests",
-        a11yTesting: "Tilgængelighedstest (WCAG 2.2 AA)",
-        secretScanning: "Scanning efter hemmeligheder",
-        rbac: "Rollebaseret adgang",
         usabilityTesting: "Brugertest",
         userInterviews: "Brugerinterviews",
         figmaPrototypes: "Prototyper i Figma",
         userCentredDesign: "Brugercentreret design",
+        a11yTesting: "Tilgængelighedstest (WCAG 2.2 AA)",
+        secretScanning: "Find nøgler og adgangskoder i koden",
+        rbac: "Rollebaseret adgang",
         accessibleDesign: "Tilgængeligt design",
         danish: "Dansk (modersmål)",
         english: "Engelsk (flydende)"
@@ -529,7 +534,7 @@ const TEXT = {
     work: {
       months: ["jan.", "feb.", "mar.", "apr.", "maj", "jun.", "jul.", "aug.", "sep.", "okt.", "nov.", "dec."],
       now: "nu",
-      titles: { patientSitter: "Fastvagt", serviceLogistics: "Service og logistik", securityGuard: "Sikkerhedsvagt" },
+      titles: { patientSitter: "Tilkaldevagt", serviceLogistics: "Service og logistik", securityGuard: "Sikkerhedsvagt" },
       places: { zealand: "Sjælland", gentofte: "Gentofte", copenhagen: "København" },
       education: { bsc: "Bachelor i software", htx: "HTX (Matematik A, Kemi A, Engelsk A)" },
       schools: { aau: "Aalborg Universitet København", hco: "H.C. Ørsted Gymnasium" }
@@ -540,7 +545,7 @@ const TEXT = {
         kind: "App til at melde barrierer for tilgængelighed, eget projekt",
         intro: [
           "Med Barrierefri kan alle melde barrierer for tilgængelighed på et kort, fx en elevator i stykker eller en fodgængerovergang uden lydsignal, og andre kan bekræfte, om de stadig er der.",
-          "Den er til folk, der har brug for at tjekke en rute, før de tager af sted, og til de kommuner og trafikselskaber, der udbedrer barriererne. Det er mit eget projekt."
+          "Barrierefri er til folk, der har brug for at tjekke en rute, før de tager af sted, og til de kommuner og trafikselskaber, der udbedrer barriererne. Det er mit eget projekt."
         ],
         coverAlt: "Barrierefris kort over det centrale København med runde markører for åbne meldinger og ruderformede markører for barrierer under udbedring.",
         images: [
@@ -550,7 +555,7 @@ const TEXT = {
           },
           {
             alt: "En tabel over sager med kolonnerne melding, status, frist, ansvarlig, bekræftelser og handlinger. Hver række viser et mærke som \"30 dage over fristen\" og knapper til at starte udbedringen eller markere sagen som udbedret.",
-            caption: "Sagskøen for medarbejdere, sorteret så de sager, der er længst over fristen, står øverst."
+            caption: "Sagsoversigten for medarbejdere, sorteret så de sager, der er længst over fristen, står øverst."
           },
           {
             alt: "Trin 1 i meldeformularen, \"Hvad er problemet?\", med syv store valgkort som \"Elevator i stykker\" og \"Ingen rampe\", og starten på trin 2 med et kort nedenunder.",
@@ -561,7 +566,7 @@ const TEXT = {
           { title: "Meld i tre trin", text: "En melding har tre trin: hvad, hvor og detaljer. Stedet vælges ved at flytte kortet under et fast trådkors, og det virker også med piletasterne." },
           { title: "Fanger dubletter", text: "Mens du udfylder formularen, foreslår appen eksisterende meldinger af samme type inden for 30 meter. Serveren tjekker igen, når meldingen bliver sendt." },
           { title: "Bekræftelser fra andre", text: "Folk markerer en barriere som \"stadig der\" eller \"udbedret\" med to store knapper. En sikkerhedsscore og et \"sandsynligvis udbedret\"-flag viser medarbejderne, hvor de skal kigge først." },
-          { title: "Sagskø med frister", text: "Hver kategori har sin egen frist, fra 2 dage for en elevator i stykker til 90 for en manglende rampe. Sager over fristen kommer først, med det antal dage, de er forsinket." }
+          { title: "Sagsoversigt med frister", text: "Hver kategori har sin egen frist, fra 2 dage for en elevator i stykker til 90 for en manglende rampe. Sager over fristen kommer først, med det antal dage, de er forsinket." }
         ],
         runs: [
           { label: "Tjenester", text: "Fem i Docker Compose: PostgreSQL 16, Keycloak, Azurite (lokal Azure Blob Storage), .NET 10-API'et og React-appen bag nginx." },
@@ -575,7 +580,7 @@ const TEXT = {
         kind: "Scanner til hemmeligheder i git-repositories, eget projekt",
         intro: [
           "leakwatch finder API-nøgler, adgangskoder og andre hemmeligheder i din kode og i hele din git-historik. Den kører som kommandolinjeværktøj, som git pre-commit hook og som GitHub Action, uden afhængigheder ud over Pythons standardbibliotek.",
-          "Den er til udviklere og studiegrupper, der vil stoppe en hemmelighed, før den bliver committet, eller finde en, der blev committet og senere slettet. Det er mit eget projekt, og jeg startede det, efter at jeg fandt en databasenøgle i en gruppes repository på universitetet."
+          "leakwatch er til udviklere og studiegrupper, der vil stoppe en hemmelighed, før den bliver committet, eller finde en, der blev committet og senere slettet. Det er mit eget projekt, og jeg startede det, efter at jeg fandt en databasenøgle i en gruppes repository på universitetet."
         ],
         coverAlt: "Terminaloutput fra leakwatch scan: en Stripe live secret key og et GitHub-token markeret critical og en committet .env-fil markeret high. Hver værdi er skjult efter de første fire tegn.",
         images: [
@@ -586,8 +591,8 @@ const TEXT = {
         ],
         features: [
           { title: "Scanner hele historikken", text: "Med `--history` læser den alle commits på alle branches og scanner kun de linjer, hver commit tilføjede. Hvert fund peger på den commit, der tilføjede hemmeligheden, for den forsvinder ikke fra git, bare fordi den bliver slettet senere." },
-          { title: "Stopper committen", text: "`leakwatch install-hook` tilføjer et pre-commit hook, der scanner det, der er staged. En hemmelighed, du har rettet på disken, men ikke har staget igen, bliver stadig fanget." },
-          { title: "Holder falske alarmer nede", text: "Et entropitjek, et filter for pladsholdere og afkodning af tokens skelner rigtige nøgler fra værdier som `password123` eller `<YOUR_API_KEY>`. Det er også afkodningen, der skelner en harmløs Supabase anon-nøgle fra en service_role-nøgle." }
+          { title: "Blokerer commit'et", text: "`leakwatch install-hook` tilføjer et pre-commit hook, der scanner det, der er staged. Har du slettet en hemmelighed i filen, men ikke kørt git add igen, ligger den stadig i det, der bliver committet, og den bliver fanget." },
+          { title: "Giver få falske alarmer", text: "Et entropitjek, et filter for pladsholdere og afkodning af tokens skelner rigtige nøgler fra værdier som `password123` eller `<YOUR_API_KEY>`. Det er også afkodningen, der skelner en harmløs Supabase anon-nøgle fra en service_role-nøgle." }
         ],
         runs: [
           { label: "Installation", text: "pip install direkte fra GitHub. Kræver Python 3.10 eller nyere og git til `--staged` og `--history`." },
@@ -790,8 +795,8 @@ function projectView(p) {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
     ${p.images && p.images.length ? section(ui.screenshots, `<div class="ov-shots">${p.images.map((img, i) => `
       <figure>
-        <img src="${esc(img.src)}" width="${img.width}" height="${img.height}" alt="${esc(tx.images[i].alt)}" decoding="async">
-        <figcaption>${rich(tx.images[i].caption)}</figcaption>
+        <img src="${esc(img.src)}" width="${img.width}" height="${img.height}" alt="${esc(tx.images[i].alt)}" loading="lazy" decoding="async">
+        <figcaption>${rich(tx.images[i].caption)}${img.credit === "osm" ? `<small class="ov-credit">${esc(ui.osmCredit[0])} <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">${esc(ui.osmCredit[1])}<span class="sr-only">${esc(ui.newTab)}</span></a></small>` : ""}</figcaption>
       </figure>`).join("")}</div>`) : ""}
     ${section(ui.whatItDoes, `<div class="ov-features">${tx.features.map(f => `
       <div class="ov-feature"><h4>${esc(f.title)}</h4><p>${rich(f.text)}</p></div>`).join("")}</div>`)}

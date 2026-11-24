@@ -78,7 +78,7 @@
   --accent-label: #ad4900;
   --accent-ink: #ffffff;
   --accent-soft: rgba(173,73,0,.08);
-  --accent-line: rgba(173,73,0,.5);
+  --accent-line: rgba(173,73,0,.75); /* 3:1 or more against white and the panels, for borders that show state */
   --backdrop: rgba(20,20,20,.5);
   --nav-bg: rgba(255,255,255,.82);
   --intro-bg: #ffffff;
@@ -420,6 +420,8 @@ html.ov-open body { padding-right: var(--scrollbar, 0); }
 .ov-shots figure { margin: 0; display: grid; gap: .6rem; align-content: start; }
 .ov-shots img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line-2); }
 .ov-shots figcaption { font-size: .88rem; color: var(--muted); }
+.ov-credit { display: block; margin-top: .3rem; font-size: .78rem; }
+.ov-credit a { display: inline-block; padding-block: .75rem; margin-block: -.75rem; text-underline-offset: 2px; } /* 44 px tall target without moving the text */
 .ov-features { display: grid; gap: 1rem; }
 .ov-feature { display: grid; gap: .45rem; align-content: start; padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
 .ov-feature h4 { margin: 0; font-size: 1rem; font-weight: 600; }
@@ -540,7 +542,7 @@ html.ov-open body { padding-right: var(--scrollbar, 0); }
   .bf-demo { grid-template-columns: 1.05fr 1fr; }
   .bf-mapwrap { position: sticky; top: 90px; }
 }
-/* ---------- Skills and tools ---------- */
+/* ---------- What I work with ---------- */
 .skill-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 3rem; }
 .skill-card { display: grid; gap: .9rem; align-content: start; padding: 1.4rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
 .skill-card h3 { font-size: 1.05rem; font-weight: 600; }
@@ -638,6 +640,7 @@ footer .mono { letter-spacing: .04em; }
   .nav-wrap .container { width: calc(100% - 1rem); }
   .nav { padding: .55rem .55rem .55rem 1rem; gap: .6rem; }
   .now li { grid-template-columns: 1fr; gap: .2rem; }
+  .typing { min-height: 3.2em; } /* the longest typed phrase can wrap to two lines here; reserving both stops the text below from jumping */
   .tabs { border-radius: 16px; }
   .tab { font-size: .82rem; }
   .overlay { padding: 0; }
