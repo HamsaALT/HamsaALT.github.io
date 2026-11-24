@@ -47,7 +47,7 @@
   --btn-glow: rgba(255,122,26,.25);
   --preview-1: #262628; --preview-2: #121213;
   /* The ID card and lanyard are a physical object: same colours in both themes */
-  --strap: #070707; --strap-edge: rgba(255,255,255,.12); --strap-text: #cfcfcf;
+  --strap: #070707; --strap-edge: rgba(255,255,255,.12);
   --clip-1: #d7d7d7; --clip-2: #7c7c7c; --clip-hole: #2a2a2a;
   --badge-1: #f4f4f2; --badge-2: #cfcfcc; --badge-slot: #9d9d9a; --badge-ink: #1a1a1a; --badge-muted: #555;
   --badge-shade: rgba(0,0,0,.35); --badge-shine: rgba(255,255,255,.8);
@@ -157,7 +157,6 @@ p { margin: 0; }
 .intro-icons span:nth-child(2) { animation-delay: .12s; }
 .intro-icons span:nth-child(3) { animation-delay: .24s; }
 .intro h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 3.4vw, 2.2rem); line-height: 1.2; animation: rise .8s .3s ease both; }
-.intro p { font-family: var(--font-mono); color: var(--faint); font-size: .8rem; animation: rise .8s .45s ease both; }
 @keyframes pop { from { opacity: 0; transform: scale(.6); } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } }
 
@@ -169,9 +168,9 @@ p { margin: 0; }
   border: 1px solid var(--line); border-radius: 999px;
   background: var(--nav-bg); backdrop-filter: blur(14px);
 }
-.brand { font-family: var(--font-mono); font-size: .9rem; color: var(--muted); text-decoration: none; letter-spacing: .04em; }
+.brand { font-family: var(--font-mono); font-size: .9rem; color: var(--muted); text-decoration: none; letter-spacing: .04em; white-space: nowrap; }
 .brand:hover { color: var(--ink); }
-.brand b, .accent { color: var(--accent); font-weight: inherit; }
+.accent { color: var(--accent); font-weight: inherit; }
 .nav ul { display: flex; gap: clamp(.6rem, 2.4vw, 2rem); list-style: none; margin: 0; padding: 0; }
 .nav ul a {
   position: relative; font-family: var(--font-mono); font-size: .85rem; letter-spacing: .06em;
@@ -193,6 +192,12 @@ p { margin: 0; }
 }
 .nav-toggle:hover, .nav-toggle[aria-expanded="true"] { border-color: var(--accent-line); color: var(--ink); }
 .nav-toggle svg { width: 16px; height: 16px; }
+/* Narrow phones: the menu button shows only its icon, so the name, EN/DA and the theme
+   button still fit on one line. The word "Menu" stays as its accessible name. */
+@media (max-width: 420px) {
+  .nav-toggle { min-width: 44px; padding: 0; justify-content: center; }
+  .nav-toggle span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 @media (max-width: 899px) {
   .nav { position: relative; }
   .nav-toggle { display: inline-flex; }
@@ -248,7 +253,6 @@ section { position: relative; padding: clamp(5rem, 10vw, 8rem) 0; }
 .lanyard svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .strap { fill: none; stroke: var(--strap); stroke-width: 20; stroke-linecap: round; }
 .strap-edge { fill: none; stroke: var(--strap-edge); stroke-width: 21; stroke-linecap: round; }
-.strap-text { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; fill: var(--strap-text); dominant-baseline: middle; }
 .badge {
   position: absolute; top: 0; left: 0; width: 210px;
   transform-origin: 50% 0;
@@ -677,7 +681,6 @@ html.ov-open body { padding-right: var(--scrollbar, 0); }
 
 footer { border-top: 1px solid var(--line); padding: 2rem 0 2.5rem; color: var(--faint); font-size: .82rem; }
 footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
-footer .mono { letter-spacing: .04em; }
 
 /* Scroll reveal: elements stay visible, they only sharpen into place */
 .reveal { transition: opacity .8s ease, transform .8s ease, filter .8s ease; }
@@ -701,6 +704,12 @@ footer .mono { letter-spacing: .04em; }
   .ov-panel { min-height: 100%; border: 0; border-radius: 0; }
   .ov-bar { border-radius: 0; }
   .ov-runs div { grid-template-columns: 1fr; gap: .2rem; }
+}
+/* Smallest phones: the name, menu icon, EN/DA and the theme button still fit on one line */
+@media (max-width: 360px) {
+  .nav { gap: .35rem; padding-left: .7rem; }
+  .brand { font-size: .78rem; letter-spacing: 0; }
+  .lang-switch { padding: 0 .55rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

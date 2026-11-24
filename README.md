@@ -1,4 +1,4 @@
-# hamsa.dev · Portfolio
+# Hamsa Hassan · Portfolio
 
 Personal portfolio of Hamsa Hassan, Software Engineering student at Aalborg University Copenhagen.
 Plain HTML, CSS and JavaScript, no build step and no framework.

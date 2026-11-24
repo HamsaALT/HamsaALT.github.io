@@ -174,6 +174,7 @@ const TEXT = {
       nowLanguagesLabel: "Languages",
       nowLanguages: "Danish and English, both fluent",
       rights: "All rights reserved.",
+      analyticsNote: "Anonymous visit counts via GoatCounter. No cookies.",
       overlayLabel: "Project",
       overlayClose: "Close",
       overlayCloseHint: " project"
@@ -537,6 +538,7 @@ const TEXT = {
       nowLanguagesLabel: "Sprog",
       nowLanguages: "Dansk og engelsk, begge flydende",
       rights: "Alle rettigheder forbeholdes.",
+      analyticsNote: "Anonym besøgstælling via GoatCounter. Ingen cookies.",
       overlayLabel: "Projekt",
       overlayClose: "Luk",
       overlayCloseHint: " projektet"
@@ -1580,6 +1582,25 @@ function demoSection(kind) {
 }
 const DEMOS = { barrierefri: demoBarrierefri, leakwatch: demoLeakwatch, greenhour: demoGreenhour, vikarbro: demoVikarbro };
 
+/* ---------- Visit counts for project views (GoatCounter) ----------
+   Each opened project counts as its own path, e.g. /project/leakwatch. Nothing is sent when
+   the visitor has Do Not Track on, and nothing happens if the GoatCounter script is blocked:
+   the call only runs once the script has loaded and set up window.goatcounter.count. */
+function countProjectView(p) {
+  if (navigator.doNotTrack === "1") return;
+  const send = () => {
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({ path: `/project/${p.slug}`, title: p.title, event: true });
+      }
+    } catch (e) { /* counting must never break the page */ }
+  };
+  // Opened straight from a shared link, the async script hasn't loaded yet. The page's load
+  // event waits for it (or for it failing), so try once more then; if it was blocked, send() does nothing.
+  if (document.readyState === "complete") send();
+  else window.addEventListener("load", send, { once: true });
+}
+
 /* ---------- Project view (full-screen dialog) ---------- */
 (function projectOverlay() {
   const overlay = document.getElementById("projectOverlay");
@@ -1607,6 +1628,7 @@ const DEMOS = { barrierefri: demoBarrierefri, leakwatch: demoLeakwatch, greenhou
     overlay.hidden = false;
     overlay.scrollTop = 0;
     closeBtn.focus();
+    countProjectView(p);
     return true;
   }
 
