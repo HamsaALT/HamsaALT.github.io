@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title and description stay here in English for search engines and link previews.
+     js/main.js sets them in the visitor's language. All other text is in TEXT in js/main.js. -->
+<title>Hamsa Hassan Portfolio</title>
+<meta name="description" content="Portfolio of Hamsa Hassan, Software Engineering student in Copenhagen.">
+<meta name="theme-color" content="#0b0b0c">
+<!-- Sets the theme before the CSS loads, so the page never shows the wrong colours first.
+     Dark is always the default; light only shows if the visitor chose it with the button. -->
+<script>
+  (function () {
+    var theme = "dark";
+    try { if (localStorage.getItem("theme") === "light") theme = "light"; } catch (e) {}
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-icons">
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg></span>
+  </div>
+  <h2 data-i18n-html="introTitle"></h2>
+  <p>hamsa.dev</p>
+</div>
+
+<header class="nav-wrap">
+  <div class="container">
+    <nav class="nav" data-i18n-attr="aria-label:navLabel">
+      <a class="brand" href="#home">hamsa<b>.</b>dev</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">
+        <span data-i18n="navMenu"></span>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul id="navLinks">
+        <li><a href="#home" data-nav="home" data-i18n="navHome"></a></li>
+        <li><a href="#about" data-nav="about" data-i18n="navAbout"></a></li>
+        <li><a href="#portfolio" data-nav="portfolio" data-i18n="navPortfolio"></a></li>
+        <li><a href="#skills" data-nav="skills" data-i18n="navSkills"></a></li>
+        <li><a href="#experience" data-nav="experience" data-i18n="navWork"></a></li>
+        <li><a href="#contact" data-nav="contact" data-i18n="navContact"></a></li>
+      </ul>
+      <button class="lang-switch" id="langSwitch" type="button">
+        <span lang="en">EN</span><span aria-hidden="true">/</span><span lang="da">DA</span>
+      </button>
+      <button class="theme-switch" id="themeSwitch" type="button" aria-pressed="false">
+        <svg class="i-sun" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="i-moon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HOME ================= -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="label" data-i18n-html="heroLabel"></p>
+        <h1 class="display" data-i18n-html="heroTitle"></h1>
+        <p class="typing" data-i18n-attr="aria-label:typedLabel"><span id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true">_</span></p>
+        <p class="desc" data-i18n="heroDesc"></p>
+        <ul class="hint-lines">
+          <li data-i18n-html="hintWork"></li>
+          <li data-i18n-html="hintOpen"></li>
+        </ul>
+      </div>
+
+      <div class="lanyard" id="lanyard" data-i18n-attr="aria-label:lanyardLabel">
+        <svg aria-hidden="true">
+          <path id="strapPath" class="strap-edge" d=""/>
+          <path class="strap" id="strapBody" d=""/>
+          <text class="strap-text"><textPath href="#strapPath" startOffset="0">HAMSA.DEV · HAMSA.DEV · HAMSA.DEV · HAMSA.DEV · HAMSA.DEV · HAMSA.DEV ·</textPath></text>
+        </svg>
+        <div class="badge" id="badge">
+          <div class="clip"></div>
+          <div class="card">
+            <div class="card-slot"></div>
+            <div class="photo">
+              <img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt="" draggable="false">
+            </div>
+            <div class="card-meta">
+              <strong>HAMSA HASSAN</strong>
+              <span data-i18n="cardRole"></span>
+            </div>
+            <div class="card-stripe"></div>
+          </div>
+        </div>
+        <p class="drag-tip" data-i18n="dragTip"></p>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#about"><span data-i18n="scrollHint"></span> <span class="accent">↓</span></a>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="label" data-i18n="aboutLabel"></p>
+          <h2 class="display">Hamsa<br>Hassan</h2>
+          <p class="body" data-i18n="aboutP1"></p>
+          <p class="body" data-i18n="aboutP2"></p>
+          <p class="quote" data-i18n="quote"></p>
+          <div class="buttons">
+            <a class="btn btn-light" href="#contact" id="cvBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+              <span data-i18n="cvButton"></span>
+            </a>
+            <a class="btn" href="#portfolio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+              <span data-i18n="viewProjects"></span>
+            </a>
+          </div>
+        </div>
+        <div class="portrait reveal"><img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt=""></div>
+      </div>
+
+      <div class="stats">
+        <a class="stat reveal" href="#portfolio" data-open-tab="projects">
+          <div class="stat-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg><span class="stat-value" id="statProjects"></span></div>
+          <div class="stat-bottom"><span class="label" data-i18n="statProjects"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+        </a>
+        <a class="stat reveal" href="#skills">
+          <div class="stat-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg><span class="stat-value" id="statSkills"></span></div>
+          <div class="stat-bottom"><span class="label" data-i18n="statSkills"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+        </a>
+        <div class="stat reveal">
+          <div class="stat-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg><span class="stat-value" data-i18n="statYearValue"></span></div>
+          <div class="stat-bottom"><span class="label" data-i18n="statYear"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTFOLIO ================= -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="center reveal">
+        <h2 class="section-title" data-i18n-html="portfolioTitle"></h2>
+        <p class="section-sub" data-i18n="portfolioSub"></p>
+      </div>
+
+      <div class="tabs" role="tablist" data-i18n-attr="aria-label:tabsLabel">
+        <div class="tab-indicator" id="tabIndicator" aria-hidden="true"></div>
+        <button class="tab" role="tab" id="tab-projects" aria-controls="panel-projects" aria-selected="true" data-tab="projects" data-i18n="tabProjects"></button>
+        <button class="tab" role="tab" id="tab-certificates" aria-controls="panel-certificates" aria-selected="false" tabindex="-1" data-tab="certificates" data-i18n="tabCertificates"></button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
+        <div class="grid" id="projectGrid"></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-certificates" aria-labelledby="tab-certificates" hidden>
+        <div class="grid" id="certGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills" aria-labelledby="skills-title">
+    <div class="container">
+      <div class="center reveal">
+        <h2 class="section-title" id="skills-title" data-i18n-html="skillsTitle"></h2>
+      </div>
+      <div class="skill-grid" id="skillGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= WORK AND EDUCATION ================= -->
+  <section id="experience" aria-labelledby="work-title">
+    <div class="container">
+      <div class="center reveal">
+        <h2 class="section-title" id="work-title" data-i18n-html="workTitle"></h2>
+        <p class="section-sub" id="work-note" data-i18n="workNote"></p>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-axis" id="tlAxis" aria-hidden="true"></div>
+        <ol class="tl-list" id="jobList"></ol>
+      </div>
+      <h3 class="edu-title" id="edu-title" data-i18n="eduTitle"></h3>
+      <ol class="edu" id="eduList" aria-labelledby="edu-title"></ol>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="center reveal">
+        <h2 class="section-title" data-i18n-html="contactTitle"></h2>
+        <p class="section-sub" data-i18n="contactSub"></p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="box reveal">
+          <h3 data-i18n="getInTouch"></h3>
+          <p data-i18n="getInTouchText"></p>
+          <form id="contactForm" novalidate>
+            <div class="field">
+              <label for="f-name" data-i18n="formName"></label>
+              <input id="f-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email" data-i18n="formEmail"></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="f-message" data-i18n="formMessage"></label>
+              <textarea id="f-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-light form-btn" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+              <span data-i18n="formSubmit"></span>
+            </button>
+            <p class="form-status" id="formStatus" role="status"></p>
+          </form>
+
+          <p class="connect-title" data-i18n="connectTitle"></p>
+          <div class="socials">
+            <a class="social" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              <span><strong>LinkedIn</strong><small>Hamsa Hassan</small></span>
+            </a>
+            <a class="social" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.7-2.8 5.7-5.5 6 .5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              <span><strong>GitHub</strong><small data-i18n="githubSmall"></small></span>
+            </a>
+            <a class="social social-wide" href="mailto:hamsahassan2950@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <span><strong data-i18n="emailLabel"></strong><small>hamsahassan2950@gmail.com</small></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="box reveal">
+          <h3 data-i18n="nowTitle"></h3>
+          <p data-i18n="nowText"></p>
+          <ul class="now">
+            <li><span class="label" data-i18n="nowStudyingLabel"></span><span data-i18n="nowStudying"></span></li>
+            <li><span class="label" data-i18n="nowBuildingLabel"></span><span data-i18n="nowBuilding"></span></li>
+            <li><span class="label" data-i18n="nowLearningLabel"></span><span data-i18n="nowLearning"></span></li>
+            <li><span class="label" data-i18n="nowAvailableLabel"></span><span data-i18n="nowAvailable"></span></li>
+            <li><span class="label" data-i18n="nowLanguagesLabel"></span><span data-i18n="nowLanguages"></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© <span id="year">2026</span> Hamsa Hassan. <span data-i18n="rights"></span></span>
+    <span class="mono">hamsa.dev</span>
+  </div>
+</footer>
+
+<!-- Project view: filled from PROJECTS in js/main.js when a "See the project" button is used. -->
+<div class="overlay" id="projectOverlay" hidden>
+  <div class="ov-panel" role="dialog" aria-modal="true" aria-labelledby="overlayTitle" tabindex="-1">
+    <div class="ov-bar">
+      <span class="ov-bar-label" data-i18n="overlayLabel"></span>
+      <button class="btn ov-close" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        <span data-i18n="overlayClose"></span><span class="sr-only" data-i18n="overlayCloseHint"></span>
+      </button>
+    </div>
+    <div class="ov-body" id="overlayBody"></div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
