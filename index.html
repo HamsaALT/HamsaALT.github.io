@@ -5,14 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Title and description stay here in English for search engines and link previews.
      js/main.js sets them in the visitor's language. All other text is in TEXT in js/main.js. -->
-<title>Hamsa Hassan Portfolio</title>
-<meta name="description" content="Portfolio of Hamsa Hassan, Software Engineering student in Copenhagen.">
+<title>Hamsa Hassan | Software Engineering student, Copenhagen</title>
+<meta name="description" content="Hamsa Hassan, Software Engineering student at Aalborg University Copenhagen. I build web applications with Java, C#, TypeScript, Angular and React.">
+<link rel="canonical" href="https://hamsaalt.github.io/">
 <meta name="theme-color" content="#0b0b0c">
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hamsaalt.github.io/">
-<meta property="og:title" content="Hamsa Hassan Portfolio">
-<meta property="og:description" content="Portfolio of Hamsa Hassan, Software Engineering student in Copenhagen.">
+<meta property="og:title" content="Hamsa Hassan | Software Engineering student, Copenhagen">
+<meta property="og:description" content="Hamsa Hassan, Software Engineering student at Aalborg University Copenhagen. I build web applications with Java, C#, TypeScript, Angular and React.">
+<meta property="og:image" content="https://hamsaalt.github.io/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The top of Hamsa Hassan's portfolio: the heading Software Engineer and an ID card with his photo.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hamsaalt.github.io/images/og.jpg">
+<meta name="twitter:image:alt" content="The top of Hamsa Hassan's portfolio: the heading Software Engineer and an ID card with his photo.">
+<meta name="twitter:title" content="Hamsa Hassan | Software Engineering student, Copenhagen">
+<meta name="twitter:description" content="Hamsa Hassan, Software Engineering student at Aalborg University Copenhagen. I build web applications with Java, C#, TypeScript, Angular and React.">
+<!-- Who this site is about, for search engines (schema.org Person). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hamsa Hassan",
+  "url": "https://hamsaalt.github.io/",
+  "image": "https://hamsaalt.github.io/images/photo.jpg",
+  "email": "mailto:hamsahassan2950@gmail.com",
+  "jobTitle": "Software Engineering student",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Aalborg University", "url": "https://www.aau.dk/" },
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Aalborg University", "url": "https://www.aau.dk/" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Copenhagen", "addressCountry": "DK" },
+  "knowsAbout": ["Java", "C#", "TypeScript", "Angular", "React", "Spring Boot", ".NET", "PostgreSQL", "Docker", "Software testing", "IT security"],
+  "sameAs": ["https://github.com/HamsaALT", "https://www.linkedin.com/in/hamsa-hassan-85b3a3378/"]
+}
+</script>
 <!-- Sets the theme before the CSS loads, so the page never shows the wrong colours first.
      The visitor's own choice (saved by the button) wins; on a first visit it follows the
      system setting, and dark is the default when the system doesn't ask for light. -->
@@ -36,7 +63,7 @@
     <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
     <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg></span>
   </div>
-  <h2 data-i18n-html="introTitle"></h2>
+  <p class="intro-title" data-i18n-html="introTitle"></p>
 </div>
 
 <header class="nav-wrap">
@@ -72,7 +99,7 @@
     <div class="container hero-grid">
       <div class="hero-text">
         <p class="label" data-i18n-html="heroLabel"></p>
-        <h1 class="display" data-i18n-html="heroTitle"></h1>
+        <h1 class="display" data-i18n-html="heroTitle"><span class="sr-only">Hamsa Hassan, </span><span>Software</span> <span class="dim">Engineer</span></h1>
         <p class="typing" data-i18n-attr="aria-label:typedLabel"><span id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true">_</span></p>
         <p class="desc" data-i18n="heroDesc"></p>
         <ul class="hint-lines">
@@ -91,7 +118,7 @@
           <div class="card">
             <div class="card-slot"></div>
             <div class="photo">
-              <img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt="" draggable="false">
+              <img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt="Photo of Hamsa Hassan" draggable="false">
             </div>
             <div class="card-meta">
               <strong>HAMSA HASSAN</strong>
@@ -127,7 +154,7 @@
             </a>
           </div>
         </div>
-        <div class="portrait reveal"><img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt=""></div>
+        <div class="portrait reveal"><img src="images/photo.jpg" data-i18n-attr="alt:photoAlt" alt="Photo of Hamsa Hassan"></div>
       </div>
 
       <div class="stats">
@@ -162,7 +189,55 @@
       </div>
 
       <div class="panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
-        <div class="grid" id="projectGrid"></div>
+        <div class="grid" id="projectGrid">
+          <!-- Plain-HTML copy of the project cards (English), so search engines and visitors
+               without JavaScript can read them. js/main.js replaces it with the cards from
+               PROJECTS in the visitor's language. Update it when PROJECTS changes. -->
+          <article class="p-card">
+            <div class="p-preview"><img src="images/projects/barrierefri/card.jpg" width="800" height="500" alt="Barrierefri's map of central Copenhagen, with round markers for open reports and diamond-shaped markers for repairs under way." loading="lazy" decoding="async"></div>
+            <div class="p-body">
+              <h3>Barrierefri</h3>
+              <p>A public map of broken lifts, blocked pavements and missing ramps, so people can check a route before they leave home.</p>
+              <ul class="pills"><li>C#</li><li>.NET</li><li>React</li><li>TypeScript</li><li>PostgreSQL</li><li>Keycloak</li><li>xUnit</li></ul>
+              <div class="p-foot">
+                <a class="btn" href="https://github.com/HamsaALT/barrierefri" target="_blank" rel="noopener noreferrer">See the code<span class="sr-only">: Barrierefri</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="p-card">
+            <div class="p-preview"><img src="images/projects/leakwatch/card.jpg" width="640" height="400" alt="Terminal output from leakwatch scan: a Stripe live secret key and a GitHub token marked critical, a committed .env file marked high, each value hidden after the first four characters." loading="lazy" decoding="async"></div>
+            <div class="p-body">
+              <h3>leakwatch</h3>
+              <p>Deleted passwords and API keys stay readable in git history. This finds them before someone else does.</p>
+              <ul class="pills"><li>Python</li><li>pytest</li><li>Git</li><li>GitHub Actions</li></ul>
+              <div class="p-foot">
+                <a class="btn" href="https://github.com/HamsaALT/leakwatch" target="_blank" rel="noopener noreferrer">See the code<span class="sr-only">: leakwatch</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="p-card">
+            <div class="p-preview"><img src="images/projects/greenhour/card.jpg" width="960" height="600" alt="GreenHour's prices page: four summary cards with the current price, the cheapest hour, the cheapest two hours and the day's average, above a bar chart of the price per quarter hour with a CO₂ line, where the cheapest two hours are marked and labelled &quot;Billigst&quot;." loading="lazy" decoding="async"></div>
+            <div class="p-body">
+              <h3>GreenHour</h3>
+              <p>Electricity prices and CO₂ per kWh in Denmark change every 15 minutes. GreenHour finds the cheapest or cleanest time to start an appliance, using live data from Energinet.</p>
+              <ul class="pills"><li>Java</li><li>Spring Boot</li><li>Angular</li><li>PostgreSQL</li><li>Keycloak</li><li>Testcontainers</li><li>Power BI</li></ul>
+              <div class="p-foot">
+                <a class="btn" href="https://github.com/HamsaALT/greenhour" target="_blank" rel="noopener noreferrer">See the code<span class="sr-only">: GreenHour</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="p-card">
+            <div class="p-preview"><img src="images/projects/vikarbro/card.jpg" width="1000" height="625" alt="Vikarbro's shift page: the shift's details on the left and a table of substitutes on the right, each marked &quot;Kan ikke&quot; (can't) with the reason, such as a missing qualification or too little rest." loading="lazy" decoding="async"></div>
+            <div class="p-body">
+              <h3>Vikarbro</h3>
+              <p>When someone calls in sick at a care home, the manager has to check every substitute by hand. Vikarbro shows who can legally take the shift, and why the others can't.</p>
+              <ul class="pills"><li>Java</li><li>Spring Boot</li><li>Angular</li><li>PostgreSQL</li><li>Keycloak</li><li>JUnit 5</li><li>Testcontainers</li></ul>
+              <div class="p-foot">
+                <a class="btn" href="https://github.com/HamsaALT/vikarbro" target="_blank" rel="noopener noreferrer">See the code<span class="sr-only">: Vikarbro</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
       <div class="panel" role="tabpanel" id="panel-certificates" aria-labelledby="tab-certificates" hidden>
         <div class="grid" id="certGrid"></div>

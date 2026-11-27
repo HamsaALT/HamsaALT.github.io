@@ -102,7 +102,7 @@ const TEXT = {
   en: {
     // Text in index.html. Keys match data-i18n (text), data-i18n-html (text with markup) and data-i18n-attr.
     page: {
-      metaDescription: "Portfolio of Hamsa Hassan, Software Engineering student in Copenhagen.",
+      metaDescription: "Hamsa Hassan, Software Engineering student at Aalborg University Copenhagen. I build web applications with Java, C#, TypeScript, Angular and React.",
       switchTo: "Switch to Danish",
       themeToLight: "Switch to light theme",
       themeToDark: "Switch to dark theme",
@@ -116,7 +116,7 @@ const TEXT = {
       navWork: "Work",
       navContact: "Contact",
       heroLabel: '<span class="accent">✦</span> Open to student jobs &amp; internships',
-      heroTitle: '<span>Software</span><span class="dim">Engineer</span>',
+      heroTitle: '<span class="sr-only">Hamsa Hassan, </span><span>Software</span> <span class="dim">Engineer</span>',
       typedLabel: "Software engineering student, C# and Java developer, UX-minded builder, based in Copenhagen",
       heroDesc: "I build modern, user-friendly software, from research and Figma prototypes to solid backends. Currently studying Software Engineering at Aalborg University Copenhagen.",
       hintWork: '<span class="accent">↓</span> explore my work below',
@@ -181,7 +181,7 @@ const TEXT = {
     },
     typed: ["software engineering student", "c# & java developer", "ux-minded builder", "based in copenhagen"],
     ui: {
-      pageTitle: "Hamsa Hassan Portfolio",
+      pageTitle: "Hamsa Hassan | Software Engineering student, Copenhagen",
       status: { finished: "Finished", inProgress: "In progress" },
       seeProject: "See the project",
       seeCode: "See the code",
@@ -466,7 +466,7 @@ const TEXT = {
   },
   da: {
     page: {
-      metaDescription: "Portfolio for Hamsa Hassan, softwarestuderende i København.",
+      metaDescription: "Hamsa Hassan, softwarestuderende på Aalborg Universitet København. Jeg bygger webapplikationer med Java, C#, TypeScript, Angular og React.",
       switchTo: "Skift til engelsk",
       themeToLight: "Skift til lyst tema",
       themeToDark: "Skift til mørkt tema",
@@ -480,7 +480,7 @@ const TEXT = {
       navWork: "Arbejde",
       navContact: "Kontakt",
       heroLabel: '<span class="accent">✦</span> Søger studiejob og praktik',
-      heroTitle: '<span>Software-</span><span class="dim">udvikler</span>',
+      heroTitle: '<span class="sr-only">Hamsa Hassan, </span><span>Software-</span><span class="dim">udvikler</span>',
       typedLabel: "Softwarestuderende, C#- og Java-udvikler, tænker i brugeroplevelse, når jeg bygger, bor i København",
       heroDesc: "Jeg bygger moderne og brugervenlig software, fra research og prototyper i Figma til solide backends. Jeg læser software på Aalborg Universitet København.",
       hintWork: '<span class="accent">↓</span> se mit arbejde længere nede',
@@ -545,7 +545,7 @@ const TEXT = {
     },
     typed: ["softwarestuderende", "c#- og java-udvikler", "tænker i brugeroplevelse, når jeg bygger", "bor i københavn"],
     ui: {
-      pageTitle: "Hamsa Hassan – portfolio",
+      pageTitle: "Hamsa Hassan | Softwarestuderende, København",
       status: { finished: "Færdig", inProgress: "I gang" },
       seeProject: "Se projektet",
       seeCode: "Se koden",
